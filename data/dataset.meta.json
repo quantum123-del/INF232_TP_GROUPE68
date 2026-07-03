@@ -1,0 +1,13 @@
+{
+  "chef_groupe": "AMBASYLVAIN",
+  "nom_normalise": "AMBASYLVAIN",
+  "graine": 1474695318,
+  "nombre_eleves": 250,
+  "colonnes": [
+    "id",
+    "score_eval",
+    "temps_etude_heures",
+    "assiduite_pct",
+    "orientation_recommandee"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "correlation_pearson": 0.895,
+  "correlation_spearman": 0.9,
+  "r_squared": 0.802,
+  "rmse": 7.17,
+  "slope": 5.1671,
+  "intercept": -11.0,
+  "p_value": 0.0,
+  "std_residuals": 7.18
+}

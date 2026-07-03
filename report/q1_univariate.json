@@ -1,0 +1,16 @@
+{
+  "mesure": "score_eval",
+  "effectif": 250,
+  "moyenne": 69.17,
+  "mediane": 69.55,
+  "ecart_type": 16.12,
+  "min": 37.7,
+  "max": 100.0,
+  "q25": 56.75,
+  "q75": 81.88,
+  "iqr": 25.12,
+  "skewness": -0.03,
+  "kurtosis": -1.04,
+  "outliers_iqr": 0,
+  "outliers_zscore": 0
+}

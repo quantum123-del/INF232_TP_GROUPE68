@@ -1,0 +1,51 @@
+{
+  "models": {
+    "logistic_regression": {
+      "cv_auc_mean": 0.997,
+      "cv_auc_std": 0.005,
+      "accuracy": 0.98,
+      "precision": 0.947,
+      "recall": 0.818,
+      "f1": 0.878,
+      "auc": 0.997,
+      "confusion_matrix": {
+        "tn": 227,
+        "fp": 1,
+        "fn": 4,
+        "tp": 18
+      }
+    },
+    "decision_tree": {
+      "cv_auc_mean": 0.978,
+      "cv_auc_std": 0.039,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "auc": 1.0,
+      "confusion_matrix": {
+        "tn": 228,
+        "fp": 0,
+        "fn": 0,
+        "tp": 22
+      }
+    },
+    "random_forest": {
+      "cv_auc_mean": 1.0,
+      "cv_auc_std": 0.0,
+      "accuracy": 1.0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "auc": 1.0,
+      "confusion_matrix": {
+        "tn": 228,
+        "fp": 0,
+        "fn": 0,
+        "tp": 22
+      }
+    }
+  },
+  "meilleur_modele": "random_forest",
+  "meilleur_auc": 1.0
+}
