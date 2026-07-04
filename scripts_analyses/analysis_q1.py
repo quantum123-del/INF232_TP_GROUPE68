@@ -26,9 +26,7 @@ def analyze_univariate(dataset_path: str) -> None:
     q75_val = score_eval.quantile(0.75)
     iqr = q75_val - q25_val
 
-    # Compute shape measures: skewness and kurtosis.
-    skewness = stats.skew(score_eval)
-    kurtosis = stats.kurtosis(score_eval)
+    # (Removed skewness and kurtosis per project constraints.)
 
     # Detect outliers using IQR and z-score methods.
     lower_bound = q25_val - 1.5 * iqr
@@ -49,8 +47,7 @@ def analyze_univariate(dataset_path: str) -> None:
         "q25": round(q25_val, 2),
         "q75": round(q75_val, 2),
         "iqr": round(iqr, 2),
-        "skewness": round(skewness, 2),
-        "kurtosis": round(kurtosis, 2),
+        # shape measures removed
         "outliers_iqr": len(outliers),
         "outliers_zscore": len(z_outliers),
     }
@@ -65,15 +62,7 @@ def analyze_univariate(dataset_path: str) -> None:
     print(f"Écart-type : {results['ecart_type']}")
     print(f"Plage (min–max) : [{results['min']}, {results['max']}]")
     print(f"Quartiles Q1–Q3 : [{results['q25']}, {results['q75']}]")
-    print(f"Asymétrie (skewness) : {results['skewness']}")
-
-    print(f"  → Interprétation : ", end="")
-    if abs(results['skewness']) < 0.5:
-        print("Distribution symétrique")
-    elif results['skewness'] > 0:
-        print("Queue vers la droite (meilleurs résultats)")
-    else:
-        print("Queue vers la gauche (résultats plus faibles)")
+    print("Remarque : les mesures de forme (skewness, kurtosis) ont été retirées du projet.")
 
     print(f"Valeurs atypiques détectées (IQR) : {results['outliers_iqr']}")
     if len(outliers) > 0:

@@ -15,37 +15,37 @@
         "tp": 18
       }
     },
-    "decision_tree": {
-      "cv_auc_mean": 0.978,
-      "cv_auc_std": 0.039,
-      "accuracy": 1.0,
-      "precision": 1.0,
+    "svm_linear": {
+      "cv_auc_mean": 0.997,
+      "cv_auc_std": 0.005,
+      "accuracy": 0.996,
+      "precision": 0.957,
       "recall": 1.0,
-      "f1": 1.0,
-      "auc": 1.0,
+      "f1": 0.978,
+      "auc": 0.999,
       "confusion_matrix": {
-        "tn": 228,
-        "fp": 0,
+        "tn": 227,
+        "fp": 1,
         "fn": 0,
         "tp": 22
       }
     },
-    "random_forest": {
-      "cv_auc_mean": 1.0,
-      "cv_auc_std": 0.0,
-      "accuracy": 1.0,
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1": 1.0,
-      "auc": 1.0,
+    "k_nearest": {
+      "cv_auc_mean": 0.996,
+      "cv_auc_std": 0.005,
+      "accuracy": 0.992,
+      "precision": 0.955,
+      "recall": 0.955,
+      "f1": 0.955,
+      "auc": 0.999,
       "confusion_matrix": {
-        "tn": 228,
-        "fp": 0,
-        "fn": 0,
-        "tp": 22
+        "tn": 227,
+        "fp": 1,
+        "fn": 1,
+        "tp": 21
       }
     }
   },
-  "meilleur_modele": "random_forest",
-  "meilleur_auc": 1.0
+  "meilleur_modele": "logistic_regression",
+  "meilleur_auc": 0.997
 }

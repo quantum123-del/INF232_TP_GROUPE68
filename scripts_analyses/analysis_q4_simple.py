@@ -8,8 +8,9 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.model_selection import train_test_split, cross_val_score, StratifiedKFold
 from sklearn.linear_model import LogisticRegression
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import (confusion_matrix, precision_score, recall_score, f1_score, 
                             roc_auc_score)
 
@@ -35,7 +36,8 @@ def analyze_q4_simplified(csv_path: str) -> None:
     models = {
         'LogisticRegression': LogisticRegression(random_state=42, max_iter=1000),
         'DecisionTree': DecisionTreeClassifier(random_state=42, max_depth=5),
-        'RandomForest': RandomForestClassifier(n_estimators=100, random_state=42, max_depth=5)
+        'KNeighbors': KNeighborsClassifier(n_neighbors=5),
+        'SVM_Linear': SVC(kernel='linear', probability=True, random_state=42)
     }
     
     results = {}

@@ -10,8 +10,10 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.dummy import DummyClassifier
 from sklearn.metrics import (
     classification_report,
     confusion_matrix,
@@ -36,10 +38,12 @@ def analyze_classification(dataset_path: str) -> None:
 
     skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
+    # Use only allowed supervised classifiers: centroid-approach (implemented via KMeans centroids + nearest centroid),
+    # k-NN, linear models and SVM. We'll provide LogisticRegression (linear), SVC (linear kernel) and KNeighborsClassifier.
     models = {
         "logistic_regression": LogisticRegression(random_state=42, max_iter=1000),
-        "decision_tree": DecisionTreeClassifier(random_state=42, max_depth=5),
-        "random_forest": RandomForestClassifier(n_estimators=100, random_state=42, max_depth=5),
+        "svm_linear": SVC(kernel="linear", probability=True, random_state=42),
+        "k_nearest": KNeighborsClassifier(n_neighbors=5),
     }
 
     results = {"models": {}}
@@ -62,7 +66,13 @@ def analyze_classification(dataset_path: str) -> None:
         # Train on the full dataset for final metrics.
         model.fit(X_scaled, y)
         y_pred = model.predict(X_scaled)
-        y_proba = model.predict_proba(X_scaled)[:, 1]
+        # Some estimators (SVC) may provide `predict_proba` when probability=True, otherwise use decision_function.
+        try:
+            y_proba = model.predict_proba(X_scaled)[:, 1]
+        except Exception:
+            # fallback to decision_function scaled to [0,1]
+            df_scores = model.decision_function(X_scaled)
+            y_proba = (df_scores - df_scores.min()) / (df_scores.max() - df_scores.min()) if df_scores.max() > df_scores.min() else np.zeros_like(df_scores)
 
         cm = confusion_matrix(y, y_pred)
         tn, fp, fn, tp = cm.ravel()
@@ -105,7 +115,11 @@ def analyze_classification(dataset_path: str) -> None:
     best_model = models[best_model_name]
     best_model.fit(X_scaled, y)
     y_pred_best = best_model.predict(X_scaled)
-    y_proba_best = best_model.predict_proba(X_scaled)[:, 1]
+    try:
+        y_proba_best = best_model.predict_proba(X_scaled)[:, 1]
+    except Exception:
+        df_scores = best_model.decision_function(X_scaled)
+        y_proba_best = (df_scores - df_scores.min()) / (df_scores.max() - df_scores.min()) if df_scores.max() > df_scores.min() else np.zeros_like(df_scores)
 
     cm_best = confusion_matrix(y, y_pred_best)
     tn_b, fp_b, fn_b, tp_b = cm_best.ravel()
